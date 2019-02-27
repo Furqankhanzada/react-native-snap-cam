@@ -3,14 +3,14 @@ package com.rnsnapcam;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
 import com.brentvatne.react.ReactVideoPackage;
+import org.reactnative.camera.RNCameraPackage;
+import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.lwansbrough.RCTCamera.RCTCameraPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,10 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new AndroidKeyboardAdjustPackage(),
             new ReactVideoPackage(),
-            new VectorIconsPackage(),
-          new RCTCameraPackage()
+            new RNCameraPackage(),
+            new AndroidKeyboardAdjustPackage(),
+            new VectorIconsPackage()
       );
     }
 
