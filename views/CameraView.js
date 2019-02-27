@@ -9,7 +9,7 @@ import {
     PermissionsAndroid,
     Picker
 } from 'react-native';
-import {RNCamera} from 'react-native-camera';
+import {RNCamera} from '../node_modules/react-native-camera/src';
 import CaptureButton from '../lib/capture-button/CaptureButton';
 import PictureView from '../lib/picture-view/PictureView';
 import VideoView from '../lib/video-view/VideoView';
@@ -147,7 +147,6 @@ class CameraView extends Component {
 
     cancelVideo(){
         if(this.captureButton){this.captureButton.resetTimer();}
-        this.camera.deleteVideoClip();
         this.setState({video: null});
     }
 
@@ -159,7 +158,6 @@ class CameraView extends Component {
             //no more clips in stack, revert to default mode
             this.setState({multiClipMode: false});
         }
-        this.camera.deleteVideoClip();
     }
 
 
@@ -188,8 +186,33 @@ class CameraView extends Component {
         }
     }
 
+    requestAudioPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+                {
+                    title: 'Cool Photo App Audio Permission',
+                    message:
+                    'Cool Photo App needs access to your Audio ' +
+                    'so you can record awesome audios.',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log('You can use the camera');
+            } else {
+                console.log('Camera permission denied');
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    }
+
     componentWillMount(){
         this.requestCameraPermission()
+        this.requestAudioPermission()
     }
 
 

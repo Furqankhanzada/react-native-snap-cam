@@ -142,6 +142,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-video-processing')
     implementation project(':react-native-video')
     implementation project(':react-native-camera')
     implementation project(':react-native-android-keyboard-adjust')

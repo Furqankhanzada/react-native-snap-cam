@@ -1,7 +1,7 @@
 package com.rnsnapcam;
 
 import android.app.Application;
-
+import com.shahenlibrary.RNVideoProcessingPackage;
 import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import org.reactnative.camera.RNCameraPackage;
@@ -29,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ReactVideoPackage(),
             new RNCameraPackage(),
+            new RNVideoProcessingPackage(),
             new AndroidKeyboardAdjustPackage(),
             new VectorIconsPackage()
       );
