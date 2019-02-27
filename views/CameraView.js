@@ -16,7 +16,7 @@ import VideoView from '../lib/video-view/VideoView';
 import ToggleButton from '../lib/toggle-button/ToggleButton';
 import MultiClipManager from '../lib/multiclip-manager/MultiClipManager';
 import LoaderButton from '../lib/loader-button/LoaderButton';
-
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 class CameraView extends Component {
 
@@ -293,8 +293,8 @@ class CameraView extends Component {
                 <ToggleButton disabled={hide} style={styles.iconButton}
                               iconSize={34}
                               color="#FFF"
-                              icon={"camera-party-mode"}
-                              toggledIcon={"emoticon-tongue"}
+                              icon={"sync"}
+                              toggledIcon={"sync"}
                               forceDefault={this.state.facing == "front"}
                               onPress={this.switchFacing.bind(this)}/>
             );
@@ -309,12 +309,8 @@ class CameraView extends Component {
         const opacity2 = {opacity: overlay == true ? 0 : 1};
 
         return (<View style={styles.bottomControls}>
-            <ToggleButton disabled={hide} style={styles.iconButton}
-                          iconSize={34}
-                          color="#FFF"
-                          icon={"flash-off"}
-                          toggledIcon={"flash"}
-                          onPress={this.toggleFlash.bind(this)}/>
+            {this.renderRightCameraControl(hide, opacity)}
+
             <CaptureButton
                 style={opacity2}
                 disabled={overlay}
@@ -323,7 +319,12 @@ class CameraView extends Component {
                 onLongPressOut={this.stopRecording.bind(this)}
                 onLongPressIn={this.startRecording.bind(this)}
                 onPressOut={this.takePicture.bind(this)}/>
-            {this.renderRightCameraControl(hide, opacity)}
+            <ToggleButton disabled={hide} style={styles.iconButton}
+                          iconSize={34}
+                          color="#FFF"
+                          icon={"flash-off"}
+                          toggledIcon={"flash"}
+                          onPress={this.toggleFlash.bind(this)}/>
         </View>);
     }
 
@@ -389,15 +390,18 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     bottomControls:{
-        flex: .23,
-        paddingBottom: '8%',
+        flex: 0,
+        height: 85,
+        paddingBottom: 25,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
+        // backgroundColor: 'red'
     },
     iconButton:{
         height: 50,
         width:50,
+        backgroundColor: 'red'
     },
     overlay:{
         position: 'absolute',
